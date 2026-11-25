@@ -1,7 +1,7 @@
 ---
 title: "Alcohol vs Seat choice"
-author: "Your Name"
-date: "Fall 2020"
+author: "Emilie Bravo"
+date: "Fall 2026"
 output: html_document
 ---
 
@@ -35,10 +35,31 @@ basicCN + geom_boxplot()
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
 
-## Numerical Summarys 
+The students in the back tend to drink more alcohol rather than the students in the front.
+
+## Numerical Summaries
+
+```{r}
+favstats(alcohol~Seat,data=davisdata)
+```
+
 
 ## Inferential Tests
 
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+The P value 0.000116 is less than 0.05, which means the null hypothesis is failed to reject.Therefore there is a relationship between where a student sits and how much alcohol they drink.
+
+```{r}
+plot(TukeyHSD(model1))
+```
+
+The tukey graph shows that students in the front back and the middle back tend to show a difference in alcohol consumption. There isn't a difference in alcohol consumption between the front and middle rows.
+
 ## Conclusions
+
+The question was if there is a difference between the alcohol consumption between students in the front seat vs. the back seat.
 
 
