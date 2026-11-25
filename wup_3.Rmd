@@ -13,29 +13,35 @@ knitr::opts_chunk$set(echo = TRUE)
 require(tidyverse)
 require(tigerstats)
 davisdata <- read.csv(file="UCDavis.csv")
+data=davisdata
 ```
-## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
-## you choose to sit in??
+ Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
+you choose to sit in??
 
-## Now with ggplot - first select the basic data
+# Introduction
+This is the question: is there a relationship between where you sit in class and how much you drink?
+Data from UC Davis Math116 class.
 
-```{r}
-basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
-```
+$H_0$ There is no relationship between the amount a student drinks and where they sit.
+
+$H_A$ There is a relationship between the amount a student drinks and where they sit.
+
+#Methods
+
+Seat is categorical, and alcohol is numerical because we are counting the amount of ounces.
+
+#Data summaries
+
+
+
 ## Now add in boxplot
 
 ```{r}
-basicCN + geom_boxplot()
+boxplot(alcohol~Seat,data=davisdata)
 ```
   
-  
-### get fancy  
 
-```{r}
-basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
-```
-
-The students in the back tend to drink more alcohol rather than the students in the front.
+The students in the back tend to drink more alcohol than the students in the front.
 
 ## Numerical Summaries
 
@@ -43,6 +49,7 @@ The students in the back tend to drink more alcohol rather than the students in 
 favstats(alcohol~Seat,data=davisdata)
 ```
 
+This numerical graph shows that the students in the back drink a mean of 12 ounces, almost 10 more ounces than the people in the middle and in the front.
 
 ## Inferential Tests
 
@@ -60,6 +67,6 @@ The tukey graph shows that students in the front back and the middle back tend t
 
 ## Conclusions
 
-The question was if there is a difference between the alcohol consumption between students in the front seat vs. the back seat.
+The question was if there is a difference between the alcohol consumption between students in the front seat vs. the back seat. The alternative hypothesis was failed to reject, there is a relationship between alcohol and seating location. The students who sit in th back consume more alcohol than the students who sit anywhere else.
 
 
